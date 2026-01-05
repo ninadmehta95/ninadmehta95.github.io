@@ -2,8 +2,12 @@
 title: "AI + Finance Notes"
 ---
 
-Short, weekly notes showing what I’m learning and building.
+Short notes on what I’m learning, building, and thinking about at the intersection of **finance, analytics, and AI**.
 
-- Week 1: Yield curve inversion — what it *really* means (+ charts)
-- Week 2: How central banks transmit policy into rates
-- Week 3: LLMs in finance — practical use cases & risks
+### Recent Topics
+- Yield curve inversion — what it *really* signals (with data)
+- How automation reshapes compliance in financial services
+- Practical AI use cases in banking (beyond hype)
+- NLP & fuzzy matching for real-world financial data
+
+This space reflects **continuous learning**, experimentation, and applied thinking.

@@ -1,0 +1,72 @@
+/* ===== Premium typography & spacing ===== */
+:root{
+  --measure: 920px;
+}
+
+body{
+  letter-spacing: 0.15px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.measure, .measure-wide{
+  max-width: var(--measure) !important;
+}
+
+/* Headings: tighter + modern */
+h1, h2, h3{
+  letter-spacing: -0.6px;
+}
+
+h1{
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+}
+
+/* Links: modern underline */
+a{
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* ===== Hero area polish (Ananke header) ===== */
+header{
+  background:
+    radial-gradient(900px circle at 50% 0%, rgba(255,255,255,0.10), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.04), transparent 35%);
+}
+
+/* CTA-ish buttons from markdown links (optional) */
+a[href^="/projects"], a[href^="/ai-finance-notes"], a[href^="/resume"], a[href^="/contact"]{
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  text-decoration: none;
+  margin: 6px 8px 0 0;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+a[href^="/projects"]:hover, a[href^="/ai-finance-notes"]:hover, a[href^="/resume"]:hover, a[href^="/contact"]:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.30);
+}
+
+/* ===== Card look for lists on pages ===== */
+ul{
+  padding-left: 1.1rem;
+}
+
+hr{
+  opacity: 0.25;
+}
+
+/* Make page sections breathe */
+main{
+  padding-top: 10px;
+}
+
+/* Slightly nicer code blocks */
+pre, code{
+  border-radius: 10px;
+}

@@ -3,3 +3,20 @@ languageCode: "en-us"
 title: "Ninad Mehta"
 theme: "ananke"
 
+menu:
+  main:
+    - name: Projects
+      pageRef: /projects
+      weight: 10
+    - name: AI + Finance Notes
+      pageRef: /ai-finance-notes
+      weight: 20
+    - name: Resume
+      pageRef: /resume
+      weight: 30
+    - name: About
+      pageRef: /about
+      weight: 40
+    - name: Contact
+      pageRef: /contact
+      weight: 50
