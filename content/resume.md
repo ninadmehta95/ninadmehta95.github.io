@@ -2,12 +2,17 @@
 title: "Resume"
 ---
 
-📄 **[Download Resume (PDF)](/resume.pdf)**
+## Resume
 
-### Highlights
-- Assistant Vice President – Data Analytics at Citi
-- 6+ years in financial services analytics & automation
-- Delivered measurable efficiency gains and cost savings
-- Strong background in ML, NLP, and BI
+For the fastest view, you can download my resume here:
 
-If you’re evaluating candidates who can **own problems end-to-end**, I’m happy to connect.
+- **Download:** [Resume PDF](#)
+
+> Replace the `#` with the actual PDF link once it’s uploaded (I can help you add it).
+
+---
+
+## Snapshot
+- **Focus:** Finance Analytics, Business Analytics, Data & Reporting
+- **Tools:** Python, SQL, Tableau, Excel
+- **Strengths:** analytics storytelling, automation, stakeholder communication
