@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ninad Mehta — Data Analytics Leader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07080c;
+      --surface: #0d0e14;
+      --surface2: #111218;
+      --border: #1c1d27;
+      --border-light: #252636;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dim: rgba(201,168,76,0.12);
+      --accent: #4a9eff;
+      --text: #dcdde8;
+      --text-soft: #9899b0;
+      --text-faint: #5a5b70;
+      --card: #0f1016;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 4rem;
+      background: rgba(7,8,12,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; letter-spacing: 0.06em; color: var(--text);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-faint); text-decoration: none;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 9rem 4rem 5rem; position: relative; overflow: hidden;
+    }
+    .hero-bg-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 65% 50%, rgba(0,0,0,0.6) 0%, transparent 70%);
+    }
+    .hero-glow {
+      position: absolute; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 65%);
+      right: -150px; top: 50%; transform: translateY(-50%); pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 860px; }
+    .eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .eyebrow-line { width: 32px; height: 1px; background: var(--gold); opacity: 0.6; }
+    .eyebrow span {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--gold);
+      letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.9;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4.5rem, 11vw, 9rem); font-weight: 500;
+      line-height: 0.92; letter-spacing: 0.01em; color: var(--text);
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      margin-top: 2rem; font-size: 1rem; color: var(--text-soft);
+      max-width: 500px; line-height: 1.8; font-weight: 300;
+    }
+    .hero-divider { width: 40px; height: 1px; background: var(--border-light); margin: 2.5rem 0; }
+    .hero-stats { display: flex; gap: 3.5rem; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 600;
+      color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.66rem; color: var(--text-faint); letter-spacing: 0.12em;
+      text-transform: uppercase; margin-top: 0.4rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.8rem; font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; transition: all 0.2s; cursor: pointer;
+    }
+    .btn-primary { background: var(--gold); color: #000; border: none; }
+    .btn-primary:hover {
+      background: var(--gold-light); transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.2);
+    }
+    .btn-ghost { background: transparent; color: var(--text-soft); border: 1px solid var(--border-light); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* SECTION LAYOUT */
+    .section-wrap { border-top: 1px solid var(--border); }
+    .section-wrap.alt { background: var(--surface); }
+    .section-wrap.alt2 { background: var(--surface2); }
+    section { padding: 7rem 4rem; max-width: 1160px; margin: 0 auto; }
+    .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--gold);
+      letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.85;
+    }
+    .section-num { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--text-faint); }
+    .section-rule { flex: 1; height: 1px; background: var(--border); }
+    h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 500; letter-spacing: 0.02em; line-height: 1.05; color: var(--text); margin-bottom: 3rem;
+    }
+    h2 em { font-style: italic; color: var(--gold); }
+
+    /* AWARD */
+    #award { border-top: 1px solid var(--border); background: linear-gradient(160deg, #0c0b08 0%, #0d0e12 100%); }
+    .award-inner {
+      max-width: 1160px; margin: 0 auto; padding: 5.5rem 4rem;
+      display: grid; grid-template-columns: auto 1fr; gap: 5rem; align-items: center;
+    }
+    .award-medallion { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+    .medallion-ring {
+      width: 108px; height: 108px; border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center; position: relative;
+      box-shadow: 0 0 50px rgba(201,168,76,0.1), inset 0 0 20px rgba(201,168,76,0.04);
+    }
+    .medallion-ring::before {
+      content: ''; position: absolute; inset: 7px; border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.25);
+    }
+    .medallion-icon { font-size: 2.4rem; line-height: 1; }
+    .medallion-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; color: var(--gold);
+      letter-spacing: 0.18em; text-transform: uppercase; text-align: center; opacity: 0.75; line-height: 1.6;
+    }
+    .award-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.28rem 0.9rem; border: 1px solid rgba(201,168,76,0.35); border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--gold);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.2rem;
+      background: rgba(201,168,76,0.04);
+    }
+    .award-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 600;
+      color: var(--text); line-height: 1.15; margin-bottom: 0.4rem;
+    }
+    .award-subtitle { font-size: 0.88rem; color: var(--gold); font-style: italic; margin-bottom: 1.4rem; opacity: 0.9; }
+    .award-desc { font-size: 0.9rem; color: var(--text-soft); line-height: 1.85; max-width: 580px; margin-bottom: 2rem; }
+    .award-desc strong { color: var(--text); font-weight: 500; }
+    .award-metrics { display: flex; gap: 3rem; }
+    .award-metric-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 600;
+      color: var(--gold); line-height: 1;
+    }
+    .award-metric-label {
+      font-size: 0.65rem; color: var(--text-faint); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-top: 0.35rem;
+    }
+
+    /* ABOUT */
+    .about-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 6rem; align-items: start; }
+    .about-text p { color: var(--text-soft); line-height: 1.9; margin-bottom: 1.1rem; font-size: 0.92rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .skill-tag {
+      display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.9rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; color: var(--text-soft);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--border-light); color: var(--text); }
+    .skill-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; opacity: 0.6; }
+
+    /* EXPERIENCE */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0.4rem; bottom: 3rem; width: 1px;
+      background: linear-gradient(to bottom, rgba(201,168,76,0.5), var(--border), transparent);
+    }
+    .timeline-item {
+      position: relative; padding: 0 0 3.5rem 2.5rem;
+      opacity: 0; transform: translateX(-14px); transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-dot {
+      position: absolute; left: -5px; top: 0.45rem;
+      width: 9px; height: 9px; background: var(--gold); border-radius: 50%;
+      border: 2px solid var(--bg); opacity: 0.75;
+    }
+    .tl-meta { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0.25rem; flex-wrap: wrap; gap: 0.5rem; }
+    .tl-role { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text); }
+    .tl-period { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text-faint); letter-spacing: 0.1em; }
+    .tl-company { font-size: 0.76rem; color: var(--text-faint); margin-bottom: 1rem; letter-spacing: 0.04em; }
+    .tl-company span { color: var(--gold); opacity: 0.9; }
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .tl-bullets li { display: flex; gap: 0.8rem; font-size: 0.84rem; color: var(--text-soft); line-height: 1.65; }
+    .tl-bullets li::before {
+      content: '–'; color: var(--gold); flex-shrink: 0;
+      font-size: 0.75rem; margin-top: 0.2em; opacity: 0.55;
+    }
+
+    /* IMPACT */
+    #impact { border-top: 1px solid var(--border); background: var(--surface); padding: 7rem 0; }
+    #impact .inner { max-width: 1160px; margin: 0 auto; padding: 0 4rem; }
+    .impact-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 3px; overflow: hidden;
+    }
+    .impact-card { background: var(--card); padding: 2.2rem; position: relative; transition: background 0.2s; }
+    .impact-card:hover { background: #13141e; }
+    .impact-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .impact-card:hover::before { opacity: 0.35; }
+    .impact-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+    .impact-title { font-size: 0.8rem; font-weight: 500; color: var(--text); margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+    .impact-desc { font-size: 0.76rem; color: var(--text-faint); line-height: 1.65; }
+
+    /* STACK */
+    .stack-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    .stack-cat { background: var(--card); border: 1px solid var(--border); border-radius: 2px; padding: 1.6rem; transition: border-color 0.2s; }
+    .stack-cat:hover { border-color: var(--border-light); }
+    .stack-cat-title { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 1.1rem; opacity: 0.8; }
+    .stack-items { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .stack-pill {
+      padding: 0.28rem 0.75rem; background: rgba(255,255,255,0.025); border: 1px solid var(--border);
+      border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; color: var(--text-soft);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .stack-pill:hover { border-color: var(--border-light); color: var(--text); }
+
+    /* EDUCATION */
+    .edu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 2px; padding: 1.8rem; transition: border-color 0.2s; }
+    .edu-card:hover { border-color: var(--border-light); }
+    .edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .edu-school { font-size: 0.76rem; color: var(--gold); margin-bottom: 0.3rem; opacity: 0.9; }
+    .edu-year { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text-faint); }
+    .cert-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .cert-item {
+      display: flex; align-items: center; gap: 0.75rem; padding: 0.82rem 1.1rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 2px;
+      font-size: 0.76rem; color: var(--text-soft); transition: color 0.2s, border-color 0.2s;
+    }
+    .cert-item:hover { color: var(--text); border-color: var(--border-light); }
+    .cert-icon {
+      width: 26px; height: 26px; background: var(--gold-dim); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-size: 0.65rem; color: var(--gold); font-family: 'Cormorant Garamond', serif; font-weight: 600;
+    }
+
+    /* CONTACT */
+    #contact-section { text-align: center; }
+    .contact-email {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+      font-weight: 500; color: var(--text); text-decoration: none;
+      display: block; margin-bottom: 2.5rem; letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .contact-email:hover { color: var(--gold); }
+    .social-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .social-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.3rem; background: var(--card); border: 1px solid var(--border);
+      border-radius: 2px; text-decoration: none; color: var(--text-soft);
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .social-link:hover { color: var(--gold); border-color: rgba(201,168,76,0.35); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text-faint); letter-spacing: 0.1em; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content > * { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+    .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.25s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.35s; }
+    .hero-content > *:nth-child(5) { animation-delay: 0.43s; }
+    .hero-content > *:nth-child(6) { animation-delay: 0.5s; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { display: none; }
+      section, #impact .inner, .award-inner { padding-left: 2rem; padding-right: 2rem; }
+      #hero { padding: 8rem 2rem 4rem; }
+      .award-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .impact-cards { grid-template-columns: 1fr 1fr; }
+      .stack-categories { grid-template-columns: 1fr 1fr; }
+      .edu-cards, .cert-list { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 4rem; }
+      .hero-stats { gap: 1.8rem; flex-wrap: wrap; }
+      .impact-cards { grid-template-columns: 1fr; }
+      .stack-categories { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .award-metrics { flex-wrap: wrap; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Ninad <span>Mehta</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#award">Recognition</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#stack">Expertise</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-bg-lines"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>
+        <span>AVP · Data Analytics · Citi · Tampa, FL</span>
+      </div>
+      <h1>Ninad<br><em>Mehta</em></h1>
+      <p class="hero-sub">
+        Five years building the data systems behind Citi's Private Banking operations —
+        from client acquisition engines to executive intelligence at scale.
+      </p>
+      <div class="hero-divider"></div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">$550K+</div>
+          <div class="stat-label">Cost Impact</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">85%</div>
+          <div class="stat-label">Process Reduction</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24%</div>
+          <div class="stat-label">Acquisition Lift</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">200K+</div>
+          <div class="stat-label">Records Analyzed</div>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+        <a href="https://www.linkedin.com/in/ninadmehta20" target="_blank" class="btn btn-ghost">LinkedIn</a>
+        <a href="https://ninadmehta01.medium.com" target="_blank" class="btn btn-ghost">Blog</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section-wrap" id="about">
+    <section>
+      <div class="section-header">
+        <span class="section-tag">About</span>
+        <div class="section-rule"></div>
+        <span class="section-num">01</span>
+      </div>
+      <h2>Data,<br>by <em>design.</em></h2>
+      <div class="about-layout">
+        <div class="about-text">
+          <p>I'm a <strong>Data Analytics & Business Intelligence professional</strong> with over five years of experience transforming high-volume, complex data into clean, decision-ready insights.</p>
+          <p>At Citibank, I build the systems that power <strong>North America Private Banking</strong> — fuzzy-logic client-matching engines, automated marketing pipelines, and executive dashboards tracking hundreds of thousands of records in real time.</p>
+          <p>My edge lies at the intersection of <strong>statistical rigor and engineering pragmatism</strong>. I don't just analyze — I automate, scale, and ship solutions that create measurable business impact.</p>
+          <p>MSc in Business Analytics from the <strong>University of South Florida</strong>. IBM and Google certified. Fluent in Python, SQL, Tableau, and the language of business decisions.</p>
+        </div>
+        <div>
+          <p class="section-tag" style="display:block; margin-bottom:1.2rem;">Core Competencies</p>
+          <div class="skills-grid">
+            <div class="skill-tag"><div class="skill-dot"></div>Python</div>
+            <div class="skill-tag"><div class="skill-dot"></div>SQL</div>
+            <div class="skill-tag"><div class="skill-dot"></div>Tableau</div>
+            <div class="skill-tag"><div class="skill-dot"></div>Power BI</div>
+            <div class="skill-tag"><div class="skill-dot"></div>Machine Learning</div>
+            <div class="skill-tag"><div class="skill-dot"></div>R</div>
+            <div class="skill-tag"><div class="skill-dot"></div>NLP / Text Mining</div>
+            <div class="skill-tag"><div class="skill-dot"></div>Data Pipelines</div>
+            <div class="skill-tag"><div class="skill-dot"></div>Fuzzy Logic</div>
+            <div class="skill-tag"><div class="skill-dot"></div>Big Data</div>
+            <div class="skill-tag"><div class="skill-dot"></div>CapIQ · BoardEx</div>
+            <div class="skill-tag"><div class="skill-dot"></div>LexisNexis</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- AWARD -->
+  <div id="award">
+    <div class="award-inner">
+      <div class="award-medallion">
+        <div class="medallion-ring">
+          <div class="medallion-icon">🏅</div>
+        </div>
+        <div class="medallion-label">Citi Gold<br>Award 2025</div>
+      </div>
+      <div class="award-content">
+        <div class="award-badge">&#9733;&nbsp; Recognition &nbsp;·&nbsp; June 2025</div>
+        <div class="award-title">Citibank Gold Award</div>
+        <div class="award-subtitle">"Great Innovation Without Any Funding"</div>
+        <p class="award-desc">
+          Designed and deployed a fully in-house <strong>activity-tracking and analytics platform</strong>
+          for a 40-member team — built without dedicated budget or external tooling. The system captures
+          daily operational data to surface performance insights, identify workflow bottlenecks, and
+          optimize workload distribution across the team, resulting in significant, measurable savings.
+        </p>
+        <div class="award-metrics">
+          <div class="award-metric">
+            <div class="award-metric-num">~$250K</div>
+            <div class="award-metric-label">Annual Cost Savings</div>
+          </div>
+          <div class="award-metric">
+            <div class="award-metric-num">40</div>
+            <div class="award-metric-label">Team Members Served</div>
+          </div>
+          <div class="award-metric">
+            <div class="award-metric-num">$0</div>
+            <div class="award-metric-label">External Budget Used</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section-wrap alt" id="experience">
+    <section>
+      <div class="section-header">
+        <span class="section-tag">Experience</span>
+        <div class="section-rule"></div>
+        <span class="section-num">02</span>
+      </div>
+      <h2>Professional<br><em>History.</em></h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="tl-meta">
+            <div class="tl-role">Assistant Vice President — Data Analytics</div>
+            <div class="tl-period">Jun 2021 – Present</div>
+          </div>
+          <div class="tl-company"><span>Citi</span> &nbsp;·&nbsp; Tampa, FL</div>
+          <ul class="tl-bullets">
+            <li>Designed and deployed a fuzzy-logic data-matching solution, increasing client acquisition opportunities by 24%.</li>
+            <li>Automated client data scrubbing pipelines for marketing campaigns, improving targeting precision and ROI.</li>
+            <li>Led year-end tax recertification project, reducing processing time by 85% through optimized data workflows.</li>
+            <li>Delivered executive-level reports analyzing 200K+ North America Private Banking records using big data methods.</li>
+            <li>Built real-time Tableau dashboards for Wealth at Work teams and peer benchmarking used by senior bankers.</li>
+            <li>Developed Python automation scripts for daily metrics tracking across account opening, maintenance, and KYC.</li>
+            <li>Spearheaded KYC/CIP, EDD/IPO due diligence and market intelligence using CapIQ, BoardEx, and LexisNexis.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="tl-meta">
+            <div class="tl-role">Graduate Teaching Assistant</div>
+            <div class="tl-period">Apr – May 2021</div>
+          </div>
+          <div class="tl-company"><span>University of South Florida</span> &nbsp;·&nbsp; Tampa, FL</div>
+          <ul class="tl-bullets">
+            <li>Assisted with Statistical Data Mining coursework, supporting students across consumer analysis, survival analysis, multilevel modeling, and time series topics.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="tl-meta">
+            <div class="tl-role">Data Science Intern</div>
+            <div class="tl-period">Jan – Apr 2021</div>
+          </div>
+          <div class="tl-company"><span>Fintech</span> &nbsp;·&nbsp; Tampa, FL</div>
+          <ul class="tl-bullets">
+            <li>Built a Python-based query search engine improving dashboard recommendation accuracy by 80%.</li>
+            <li>Applied NLP techniques — stemming, lemmatization, and word embeddings — to refine search precision.</li>
+            <li>Optimized fuzzy-matching algorithms and streamlined data extraction workflows for BI reporting.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="tl-meta">
+            <div class="tl-role">Assistant Research Analyst</div>
+            <div class="tl-period">May – Aug 2020</div>
+          </div>
+          <div class="tl-company"><span>University of South Florida</span> &nbsp;·&nbsp; Tampa, FL</div>
+          <ul class="tl-bullets">
+            <li>Forecasted COVID-19 hospitalizations at zip-code level with 86% accuracy using data mining methods.</li>
+            <li>Merged Apple mobility data with FL Health Dept. records; published Tableau dashboards used statewide for travel guidance.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="tl-meta">
+            <div class="tl-role">Data Analyst</div>
+            <div class="tl-period">Sep 2017 – Sep 2018</div>
+          </div>
+          <div class="tl-company"><span>Global Technologies</span> &nbsp;·&nbsp; Gujarat, India</div>
+          <ul class="tl-bullets">
+            <li>Developed a DBMS for insurance claims processing, including ERDs, optimized SQL queries, and scalable schema design.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- IMPACT -->
+  <div id="impact">
+    <div class="inner">
+      <div class="section-header">
+        <span class="section-tag">Impact</span>
+        <div class="section-rule"></div>
+        <span class="section-num">03</span>
+      </div>
+      <h2>Measurable<br><em>Results.</em></h2>
+      <div style="height:2.5rem;"></div>
+      <div class="impact-cards">
+        <div class="impact-card">
+          <div class="impact-num">$250K</div>
+          <div class="impact-title">Gold Award Cost Savings</div>
+          <div class="impact-desc">Annual savings from an in-house activity-tracking tool built for 40 people with zero external budget — recognized with Citi's Gold Award.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num">85%</div>
+          <div class="impact-title">Faster Processing</div>
+          <div class="impact-desc">Reduction in year-end tax recertification time through improved data pipelines and workflow automation.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num">24%</div>
+          <div class="impact-title">Client Acquisition Lift</div>
+          <div class="impact-desc">Fuzzy-logic data-matching solution unlocked new client opportunities across Wealth at Work teams.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num">86%</div>
+          <div class="impact-title">Forecast Accuracy</div>
+          <div class="impact-desc">COVID-19 hospitalization forecasting at zip-code level — dashboards used statewide to guide travel decisions.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num">80%</div>
+          <div class="impact-title">Search Precision Gain</div>
+          <div class="impact-desc">Improvement in dashboard recommendation accuracy from a Python NLP-powered query search engine.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num">200K+</div>
+          <div class="impact-title">Records Analyzed</div>
+          <div class="impact-desc">North America Private Banking records processed and delivered to executive leadership via big data methods.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STACK -->
+  <div class="section-wrap" id="stack">
+    <section>
+      <div class="section-header">
+        <span class="section-tag">Technical Expertise</span>
+        <div class="section-rule"></div>
+        <span class="section-num">04</span>
+      </div>
+      <h2>Tools &amp;<br><em>Technologies.</em></h2>
+      <div class="stack-categories">
+        <div class="stack-cat">
+          <div class="stack-cat-title">Languages</div>
+          <div class="stack-items">
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">SQL</span>
+            <span class="stack-pill">R</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <div class="stack-cat-title">Visualization</div>
+          <div class="stack-items">
+            <span class="stack-pill">Tableau</span>
+            <span class="stack-pill">Power BI</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <div class="stack-cat-title">ML &amp; Analytics</div>
+          <div class="stack-items">
+            <span class="stack-pill">Scikit-learn</span>
+            <span class="stack-pill">NLP</span>
+            <span class="stack-pill">Fuzzy Logic</span>
+            <span class="stack-pill">Time Series</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <div class="stack-cat-title">Data Engineering</div>
+          <div class="stack-items">
+            <span class="stack-pill">Data Pipelines</span>
+            <span class="stack-pill">ETL Automation</span>
+            <span class="stack-pill">Big Data</span>
+            <span class="stack-pill">DBMS / ERD</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <div class="stack-cat-title">Research Platforms</div>
+          <div class="stack-items">
+            <span class="stack-pill">CapIQ</span>
+            <span class="stack-pill">BoardEx</span>
+            <span class="stack-pill">LexisNexis</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <div class="stack-cat-title">Domain Knowledge</div>
+          <div class="stack-items">
+            <span class="stack-pill">Private Banking</span>
+            <span class="stack-pill">KYC / AML</span>
+            <span class="stack-pill">Marketing Analytics</span>
+            <span class="stack-pill">BI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section-wrap alt2" id="education">
+    <section>
+      <div class="section-header">
+        <span class="section-tag">Education &amp; Certifications</span>
+        <div class="section-rule"></div>
+        <span class="section-num">05</span>
+      </div>
+      <h2>Academic<br><em>Foundations.</em></h2>
+      <div class="edu-cards">
+        <div class="edu-card">
+          <div class="edu-degree">MSc · Business Analytics &amp; Information Systems</div>
+          <div class="edu-school">University of South Florida</div>
+          <div class="edu-year">2019 — 2021 · Tampa, FL</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">BTech · Computer Engineering</div>
+          <div class="edu-school">Charotar University of Science and Technology</div>
+          <div class="edu-year">2013 — 2017 · Gujarat, India</div>
+        </div>
+      </div>
+      <div class="cert-list">
+        <div class="cert-item"><div class="cert-icon">G</div>Google Data Analytics Professional Certificate</div>
+        <div class="cert-item"><div class="cert-icon">I</div>IBM Data Science Professional Certificate</div>
+        <div class="cert-item"><div class="cert-icon">M</div>McKinsey.org Forward Program</div>
+        <div class="cert-item"><div class="cert-icon">∑</div>Statistical Inference · Johns Hopkins</div>
+        <div class="cert-item"><div class="cert-icon">μ</div>Microeconomics: The Power of Markets · Penn</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section-wrap" id="contact">
+    <section id="contact-section">
+      <div class="section-header" style="justify-content:center; margin-bottom:2rem;">
+        <span class="section-tag">Contact</span>
+        <div class="section-rule" style="max-width:100px;"></div>
+        <span class="section-num">06</span>
+      </div>
+      <p style="color:var(--text-soft); font-size:0.86rem; margin-bottom:1.5rem; max-width:360px; margin-left:auto; margin-right:auto; line-height:1.7;">
+        Open to data leadership conversations, advisory opportunities, and meaningful collaboration.
+      </p>
+      <a href="mailto:ninadmehta01@gmail.com" class="contact-email">ninadmehta01@gmail.com</a>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/ninadmehta20" target="_blank" class="social-link">LinkedIn</a>
+        <a href="https://ninadmehta01.medium.com" target="_blank" class="social-link">Medium Blog</a>
+        <a href="https://bit.ly/3tKC7Pl" target="_blank" class="social-link">Portfolio</a>
+        <a href="tel:+18133574623" class="social-link">+1 813 357 4623</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <span>© 2026 Ninad Mehta</span>
+    <span>Tampa, Florida &nbsp;·&nbsp; ninadmehta01@gmail.com</span>
+  </footer>
+
+  <script>
+    const items = document.querySelectorAll('.timeline-item');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 90);
+      });
+    }, { threshold: 0.08 });
+    items.forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>
