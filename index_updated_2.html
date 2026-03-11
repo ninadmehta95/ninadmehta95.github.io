@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ninad Mehta — Data Analytics Leader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #f7f6f2;
+      --bg2:     #efeee9;
+      --bg3:     #e6e4dd;
+      --green:   #1a3a2a;
+      --green2:  #245238;
+      --green-bg: rgba(26,58,42,0.07);
+      --ink:     #1c1c1c;
+      --ink2:    #2e2e2e;
+      --muted:   #6b6b6b;
+      --body:    #3d3d3d;
+      --rule:    rgba(0,0,0,0.1);
+      --card:    rgba(255,255,255,0.7);
+      --card-border: rgba(0,0,0,0.1);
+      /* keep old variable names mapped so existing CSS works */
+      --navy:    #f7f6f2;
+      --navy2:   #efeee9;
+      --navy3:   #e6e4dd;
+      --gold:    #1a3a2a;
+      --gold-lt: #245238;
+      --gold-bg: rgba(26,58,42,0.07);
+      --white:   #1c1c1c;
+      --faint:   #3d3d3d;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5rem; height: 64px;
+      background: rgba(247,246,242,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 1rem; }
+    .nav-monogram {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem; font-weight: 700; color: var(--gold);
+    }
+    .nav-name { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.07em; color: var(--faint); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.67rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding-top: 64px; position: relative; overflow: hidden;
+    }
+    .hero-left { padding: 7rem 4rem 7rem 5rem; position: relative; z-index: 1; }
+    .hero-right {
+      position: relative; height: 100%;
+      background: var(--navy2); border-left: 1px solid var(--rule);
+      display: flex; flex-direction: column; justify-content: center; padding: 5rem 4rem;
+    }
+    .hero-right::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 30%, rgba(26,58,42,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .tag-line { display: inline-flex; align-items: center; gap: 0.7rem; margin-bottom: 2rem; }
+    .tag-line-bar { width: 24px; height: 1.5px; background: var(--gold); }
+    .tag-line span { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; }
+
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.2rem, 5.5vw, 5.2rem); font-weight: 700; line-height: 1.08; color: var(--white); letter-spacing: -0.01em; }
+    h1 em { font-style: italic; color: var(--gold); }
+    .hero-title-sub { margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .hero-bio { margin-top: 2rem; font-size: 0.93rem; color: var(--faint); line-height: 1.85; max-width: 440px; }
+
+    .hero-cta { display: flex; gap: 0.9rem; margin-top: 3rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.72rem 1.7rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; cursor: pointer; font-family: 'Inter', sans-serif; }
+    .btn-gold { background: var(--gold); color: #ffffff; border: none; }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,58,42,0.2); }
+    .btn-outline { background: transparent; color: var(--faint); border: 1px solid rgba(255,255,255,0.14); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; margin-bottom: 2rem; }
+    .stat-cell { background: var(--navy2); padding: 1.8rem 1.6rem; transition: background 0.2s; }
+    .stat-cell:hover { background: var(--navy3); }
+    .stat-val { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .stat-lbl { font-size: 0.61rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+
+    .hero-award-pill { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.3rem; background: var(--gold-bg); border: 1px solid rgba(26,58,42,0.2); border-radius: 3px; }
+    .award-pill-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; }
+    .award-pill-title { font-size: 0.74rem; font-weight: 600; color: var(--gold); letter-spacing: 0.04em; }
+    .award-pill-desc { font-size: 0.67rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.5; }
+
+    /* SHARED SECTION */
+    .sec-wrap { border-top: 1px solid var(--rule); }
+    .sec-wrap.alt { background: var(--navy2); }
+    .sec-wrap.alt2 { background: var(--navy3); }
+    section { padding: 6.5rem 5rem; max-width: 1220px; margin: 0 auto; }
+
+    .sec-label { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.7rem; }
+    .sec-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.22em; text-transform: uppercase; }
+    .sec-rule { flex: 1; height: 1px; background: var(--rule); }
+    .sec-num { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); }
+
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.12; color: var(--white); margin-bottom: 3rem; }
+    h2 em { font-style: italic; color: var(--gold); }
+
+    /* AWARD SPOTLIGHT */
+    #award {
+      background: linear-gradient(135deg, #f0ede4 0%, #ebe8df 50%, #e8e5db 100%);
+      border-top: 1px solid rgba(26,58,42,0.2);
+      border-bottom: 1px solid rgba(26,58,42,0.2);
+    }
+    .award-wrap { max-width: 1220px; margin: 0 auto; padding: 6rem 5rem; display: grid; grid-template-columns: 220px 1fr; gap: 5rem; align-items: center; }
+
+    .award-seal { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+    .seal-outer { width: 140px; height: 140px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 40px rgba(26,58,42,0.1), inset 0 0 20px rgba(26,58,42,0.04); }
+    .seal-outer::before { content: ''; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid rgba(26,58,42,0.25); }
+    .seal-outer::after { content: ''; position: absolute; inset: 16px; border-radius: 50%; border: 1px dashed rgba(26,58,42,0.12); }
+    .seal-star { font-size: 3rem; line-height: 1; }
+    .seal-label { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; text-align: center; line-height: 1.8; opacity: 0.8; }
+
+    .award-overline { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.25rem 0.85rem; border: 1px solid rgba(26,58,42,0.25); border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase; background: rgba(26,58,42,0.06); margin-bottom: 1.4rem; }
+    .award-heading { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 0.4rem; }
+    .award-subheading { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--gold); margin-bottom: 1.6rem; opacity: 0.9; }
+    .award-text { font-size: 0.9rem; color: var(--faint); line-height: 1.9; max-width: 600px; margin-bottom: 2.5rem; }
+    .award-text strong { color: var(--white); font-weight: 500; }
+
+    .award-kpis { display: flex; border: 1px solid rgba(26,58,42,0.18); border-radius: 3px; overflow: hidden; }
+    .award-kpi { flex: 1; padding: 1.4rem 1.6rem; background: rgba(26,58,42,0.05); border-right: 1px solid rgba(26,58,42,0.12); transition: background 0.2s; }
+    .award-kpi:last-child { border-right: none; }
+    .award-kpi:hover { background: rgba(26,58,42,0.1); }
+    .kpi-val { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .kpi-lbl { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+
+    /* ABOUT */
+    .about-cols { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 0.9rem; color: var(--faint); line-height: 1.9; margin-bottom: 1.1rem; }
+    .about-text p strong { color: var(--white); font-weight: 500; }
+    .skills-label { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .skill-chip { display: flex; align-items: center; gap: 0.55rem; padding: 0.6rem 0.85rem; background: var(--card); border: 1px solid var(--card-border); border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--faint); transition: border-color 0.2s, color 0.2s; }
+    .skill-chip:hover { border-color: rgba(26,58,42,0.35); color: var(--white); }
+    .chip-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; opacity: 0.55; }
+
+    /* EXPERIENCE */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0.5rem; bottom: 3rem; width: 1px; background: linear-gradient(to bottom, rgba(26,58,42,0.5), rgba(26,58,42,0.1), transparent); }
+    .tl-item { position: relative; padding: 0 0 3.5rem 2.5rem; opacity: 1; transform: translateX(0); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .tl-item.vis { opacity: 1; transform: translateX(0); }
+    .tl-dot { position: absolute; left: -5px; top: 0.5rem; width: 9px; height: 9px; background: var(--gold); border-radius: 50%; border: 2px solid var(--navy2); }
+    .tl-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0.2rem; flex-wrap: wrap; gap: 0.5rem; }
+    .tl-role { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--white); }
+    .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
+    .tl-co { font-size: 0.74rem; color: var(--muted); margin-bottom: 1rem; }
+    .tl-co strong { color: var(--gold); font-weight: 500; }
+    .tl-pts { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .tl-pts li { display: flex; gap: 0.8rem; font-size: 0.85rem; color: var(--faint); line-height: 1.65; }
+    .tl-pts li::before { content: '—'; color: var(--gold); opacity: 0.6; flex-shrink: 0; font-size: 0.75rem; margin-top: 0.22em; }
+
+    /* IMPACT */
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.08); border-radius: 3px; overflow: hidden; }
+    .metric-card { background: var(--navy2); padding: 2.2rem 2rem; transition: background 0.2s; position: relative; }
+    .metric-card:hover { background: var(--navy3); }
+    .metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); opacity: 0; transition: opacity 0.3s; }
+    .metric-card:hover::before { opacity: 1; }
+    .metric-val { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+    .metric-title { font-size: 0.78rem; font-weight: 500; color: var(--white); margin-bottom: 0.4rem; }
+    .metric-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.6; }
+
+    /* STACK */
+    .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .stack-group { background: var(--card); border: 1px solid var(--card-border); border-radius: 2px; padding: 1.6rem; transition: border-color 0.2s; }
+    .stack-group:hover { border-color: rgba(26,58,42,0.3); }
+    .stack-group-title { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; opacity: 0.85; }
+    .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .pill { padding: 0.28rem 0.72rem; background: rgba(0,0,0,0.03); border: 1px solid var(--card-border); border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--faint); transition: border-color 0.2s, color 0.2s; }
+    .pill:hover { border-color: rgba(26,58,42,0.35); color: var(--white); }
+
+    /* EDUCATION */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin-bottom: 1.2rem; }
+    .edu-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 2px; padding: 1.8rem; transition: border-color 0.2s; }
+    .edu-card:hover { border-color: rgba(26,58,42,0.3); }
+    .edu-deg { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+    .edu-school { font-size: 0.74rem; color: var(--gold); margin-bottom: 0.3rem; }
+    .edu-yr { font-family: 'JetBrains Mono', monospace; font-size: 0.59rem; color: var(--muted); }
+    .certs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+    .cert-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 1rem; background: var(--card); border: 1px solid var(--card-border); border-radius: 2px; font-size: 0.75rem; color: var(--faint); transition: color 0.2s, border-color 0.2s; }
+    .cert-row:hover { color: var(--white); border-color: rgba(26,58,42,0.3); }
+    .cert-badge { width: 26px; height: 26px; background: var(--gold-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.63rem; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: 700; }
+
+    /* CONTACT */
+    #contact { text-align: center; }
+    #contact section { display: flex; flex-direction: column; align-items: center; }
+    .contact-headline { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+    .contact-sub { font-size: 0.86rem; color: var(--muted); max-width: 360px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .contact-email { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 2.5vw, 2rem); color: var(--gold); text-decoration: none; display: block; margin-bottom: 2.5rem; transition: color 0.2s; }
+    .contact-email:hover { color: var(--gold-lt); }
+    .socials { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+    .social-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.3rem; background: var(--card); border: 1px solid var(--card-border); border-radius: 2px; text-decoration: none; color: var(--muted); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
+    .social-btn:hover { color: var(--gold); border-color: rgba(26,58,42,0.35); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--rule); padding: 1.8rem 5rem; display: flex; justify-content: space-between; align-items: center; background: var(--navy3); }
+    footer span { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-left > * { animation: fadeUp 0.85s cubic-bezier(0.16,1,0.3,1) both; }
+    .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-left > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-left > *:nth-child(3) { animation-delay: 0.22s; }
+    .hero-left > *:nth-child(4) { animation-delay: 0.3s; }
+    .hero-left > *:nth-child(5) { animation-delay: 0.38s; }
+    .hero-right > * { animation: fadeUp 0.85s cubic-bezier(0.16,1,0.3,1) both; animation-delay: 0.45s; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--navy2); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 2rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { border-left: none; border-top: 1px solid var(--rule); }
+      .hero-left, .hero-right { padding: 4rem 2rem; }
+      section { padding: 5rem 2rem; }
+      .award-wrap { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 2rem; }
+      .award-seal { flex-direction: row; gap: 1.5rem; }
+      .about-cols { grid-template-columns: 1fr; gap: 3rem; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .stack-grid { grid-template-columns: 1fr 1fr; }
+      .edu-grid, .certs-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.6rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 3rem; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .award-kpis { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-monogram">NM</div>
+    <span class="nav-name">Ninad Mehta</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#award">Recognition</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#stack">Expertise</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-left">
+    <div class="tag-line">
+      <div class="tag-line-bar"></div>
+      <span>AVP · Data Analytics · Citi · Tampa, FL</span>
+    </div>
+    <h1>Ninad<br><em>Mehta</em></h1>
+    <div class="hero-title-sub">Data Analytics &amp; Business Intelligence</div>
+    <p class="hero-bio">
+      Five years building the analytical infrastructure behind Citi's North America Private Banking —
+      from fuzzy-logic matching engines to executive intelligence dashboards at scale.
+      Awarded Citi's Gold Award for innovation that delivered $250K in annual savings.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-gold">Get In Touch</a>
+      <a href="https://www.linkedin.com/in/ninadmehta20" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      <a href="https://ninadmehta01.medium.com" target="_blank" class="btn btn-outline">Blog ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-val">$550K+</div>
+        <div class="stat-lbl">Total Cost Impact</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">85%</div>
+        <div class="stat-lbl">Process Reduction</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">24%</div>
+        <div class="stat-lbl">Acquisition Lift</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">200K+</div>
+        <div class="stat-lbl">Records Analyzed</div>
+      </div>
+    </div>
+    <div class="hero-award-pill">
+      <div class="award-pill-icon">🏅</div>
+      <div class="award-pill-text">
+        <div class="award-pill-title">Citibank Gold Award — June 2025</div>
+        <div class="award-pill-desc">"Great Innovation Without Any Funding" · ~$250K annual savings</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AWARD SPOTLIGHT -->
+<div id="award">
+  <div class="award-wrap">
+    <div class="award-seal">
+      <div class="seal-outer">
+        <div class="seal-star">🏅</div>
+      </div>
+      <div class="seal-label">Citi Gold<br>Award<br>June 2025</div>
+    </div>
+    <div class="award-body">
+      <div class="award-overline">★ &nbsp; Recognition &nbsp;·&nbsp; Citibank, N.A.</div>
+      <div class="award-heading">Citibank Gold Award</div>
+      <div class="award-subheading">"Great Innovation Without Any Funding"</div>
+      <p class="award-text">
+        Designed and deployed a fully <strong>in-house activity-tracking and analytics platform</strong>
+        for a 40-member team — built without dedicated budget, external vendors, or off-the-shelf tooling.
+        The system captures daily operational data to surface performance insights, identify workflow bottlenecks,
+        and optimize workload distribution across the team. The impact was immediate and measurable,
+        earning Citi's highest internal innovation recognition.
+      </p>
+      <div class="award-kpis">
+        <div class="award-kpi">
+          <div class="kpi-val">~$250K</div>
+          <div class="kpi-lbl">Annual Cost Savings</div>
+        </div>
+        <div class="award-kpi">
+          <div class="kpi-val">40</div>
+          <div class="kpi-lbl">Team Members Served</div>
+        </div>
+        <div class="award-kpi">
+          <div class="kpi-val">$0</div>
+          <div class="kpi-lbl">External Budget Used</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="sec-wrap" id="about">
+  <section>
+    <div class="sec-label">
+      <span class="sec-tag">About</span>
+      <div class="sec-rule"></div>
+      <span class="sec-num">01</span>
+    </div>
+    <h2>Data, by <em>design.</em></h2>
+    <div class="about-cols">
+      <div class="about-text">
+        <p>I'm a <strong>Data Analytics &amp; Business Intelligence professional</strong> with over five years of experience transforming high-volume, complex data into clean, decision-ready insights inside one of the world's largest financial institutions.</p>
+        <p>At Citibank, I build the systems that power <strong>North America Private Banking</strong> — from fuzzy-logic client-matching engines and automated marketing pipelines to executive dashboards tracking hundreds of thousands of records in real time.</p>
+        <p>My edge lies at the intersection of <strong>statistical rigor and engineering pragmatism</strong>. I don't just analyze — I automate, scale, and ship solutions that create measurable business impact, recognized with Citi's Gold Award for innovation.</p>
+        <p>MSc in Business Analytics from the <strong>University of South Florida</strong>. IBM and Google certified. Fluent in Python, SQL, Tableau, and the language of business decisions.</p>
+      </div>
+      <div>
+        <div class="skills-label">Core Competencies</div>
+        <div class="skills-grid">
+          <div class="skill-chip"><div class="chip-dot"></div>Python</div>
+          <div class="skill-chip"><div class="chip-dot"></div>SQL</div>
+          <div class="skill-chip"><div class="chip-dot"></div>Tableau</div>
+          <div class="skill-chip"><div class="chip-dot"></div>Power BI</div>
+          <div class="skill-chip"><div class="chip-dot"></div>Machine Learning</div>
+          <div class="skill-chip"><div class="chip-dot"></div>R</div>
+          <div class="skill-chip"><div class="chip-dot"></div>NLP / Text Mining</div>
+          <div class="skill-chip"><div class="chip-dot"></div>Data Pipelines</div>
+          <div class="skill-chip"><div class="chip-dot"></div>Fuzzy Logic</div>
+          <div class="skill-chip"><div class="chip-dot"></div>Big Data</div>
+          <div class="skill-chip"><div class="chip-dot"></div>CapIQ · BoardEx</div>
+          <div class="skill-chip"><div class="chip-dot"></div>LexisNexis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="sec-wrap alt" id="experience">
+  <section>
+    <div class="sec-label">
+      <span class="sec-tag">Experience</span>
+      <div class="sec-rule"></div>
+      <span class="sec-num">02</span>
+    </div>
+    <h2>Professional <em>History.</em></h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div class="tl-role">Assistant Vice President — Data Analytics</div>
+          <div class="tl-date">Jun 2021 – Present</div>
+        </div>
+        <div class="tl-co"><strong>Citi</strong> &nbsp;·&nbsp; Tampa, FL &nbsp;·&nbsp; 4 yrs 10 mos</div>
+        <ul class="tl-pts">
+          <li>Built in-house activity-tracking and analytics tool for a 40-member team with $0 external budget, resulting in ~$250K in annual cost savings.</li>
+          <li>Designed fuzzy-logic data-matching solution, increasing client acquisition opportunities by 24%.</li>
+          <li>Automated client data scrubbing pipelines for marketing campaigns, improving targeting precision and ROI.</li>
+          <li>Led year-end tax recertification project, reducing processing time by 85% through optimized data workflows.</li>
+          <li>Delivered executive-level reports analyzing 200K+ North America Private Banking records using big data methods.</li>
+          <li>Built real-time Tableau dashboards for Wealth at Work teams and peer benchmarking used by senior bankers.</li>
+          <li>Developed Python automation scripts for daily metrics tracking across account opening, maintenance, and KYC.</li>
+          <li>Spearheaded KYC/CIP, EDD/IPO due diligence and market intelligence using CapIQ, BoardEx, and LexisNexis.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div class="tl-role">Graduate Teaching Assistant</div>
+          <div class="tl-date">Apr – May 2021</div>
+        </div>
+        <div class="tl-co"><strong>University of South Florida</strong> &nbsp;·&nbsp; Tampa, FL</div>
+        <ul class="tl-pts">
+          <li>Assisted with Statistical Data Mining coursework — grading, instruction, and student mentorship.</li>
+          <li>Covered consumer analysis, survival analysis, multilevel modeling, and time series topics.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div class="tl-role">Data Science Intern</div>
+          <div class="tl-date">Jan – Apr 2021</div>
+        </div>
+        <div class="tl-co"><strong>Fintech</strong> &nbsp;·&nbsp; Tampa, FL</div>
+        <ul class="tl-pts">
+          <li>Built a Python-based query search engine improving dashboard recommendation accuracy by 80%.</li>
+          <li>Applied NLP techniques — stemming, lemmatization, and word embeddings — to refine search precision.</li>
+          <li>Optimized fuzzy-matching algorithms and streamlined BI data extraction workflows.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div class="tl-role">Assistant Research Analyst</div>
+          <div class="tl-date">May – Aug 2020</div>
+        </div>
+        <div class="tl-co"><strong>University of South Florida</strong> &nbsp;·&nbsp; Tampa, FL</div>
+        <ul class="tl-pts">
+          <li>Forecasted COVID-19 hospitalizations at zip-code level with 86% accuracy using data mining methods.</li>
+          <li>Merged Apple mobility data with FL Health Dept. records; published real-time Tableau dashboards used statewide.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div class="tl-role">Data Analyst</div>
+          <div class="tl-date">Sep 2017 – Sep 2018</div>
+        </div>
+        <div class="tl-co"><strong>Global Technologies</strong> &nbsp;·&nbsp; Gujarat, India</div>
+        <ul class="tl-pts">
+          <li>Built a DBMS for insurance claims processing — ERDs, optimized SQL queries, and scalable schema design.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- IMPACT METRICS -->
+<div class="sec-wrap alt2" id="impact">
+  <section>
+    <div class="sec-label">
+      <span class="sec-tag">Impact</span>
+      <div class="sec-rule"></div>
+      <span class="sec-num">03</span>
+    </div>
+    <h2>Numbers That <em>Matter.</em></h2>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-val">~$250K</div>
+        <div class="metric-title">Gold Award Savings</div>
+        <div class="metric-desc">Annual savings from in-house analytics tool built with zero external budget — recognized with Citi's Gold Award.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">85%</div>
+        <div class="metric-title">Faster Processing</div>
+        <div class="metric-desc">Reduction in year-end tax recertification time through improved data pipelines and automation.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">24%</div>
+        <div class="metric-title">Client Acquisition Lift</div>
+        <div class="metric-desc">Fuzzy-logic matching solution that unlocked new client opportunities across Wealth at Work teams.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">86%</div>
+        <div class="metric-title">Forecast Accuracy</div>
+        <div class="metric-desc">COVID-19 hospitalization model at zip-code level used statewide to guide public travel decisions.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">80%</div>
+        <div class="metric-title">Search Precision Gain</div>
+        <div class="metric-desc">Improvement in dashboard recommendation accuracy from a Python NLP-powered query engine.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">200K+</div>
+        <div class="metric-title">Records Analyzed</div>
+        <div class="metric-desc">North America Private Banking records processed and delivered to executive leadership.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TECH STACK -->
+<div class="sec-wrap" id="stack">
+  <section>
+    <div class="sec-label">
+      <span class="sec-tag">Technical Expertise</span>
+      <div class="sec-rule"></div>
+      <span class="sec-num">04</span>
+    </div>
+    <h2>Tools &amp; <em>Technologies.</em></h2>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <div class="stack-group-title">Languages</div>
+        <div class="pills"><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">R</span></div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-title">Visualization</div>
+        <div class="pills"><span class="pill">Tableau</span><span class="pill">Power BI</span></div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-title">ML &amp; Analytics</div>
+        <div class="pills"><span class="pill">Scikit-learn</span><span class="pill">NLP</span><span class="pill">Fuzzy Logic</span><span class="pill">Time Series</span></div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-title">Data Engineering</div>
+        <div class="pills"><span class="pill">Data Pipelines</span><span class="pill">ETL Automation</span><span class="pill">Big Data</span><span class="pill">DBMS / ERD</span></div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-title">Research Platforms</div>
+        <div class="pills"><span class="pill">CapIQ</span><span class="pill">BoardEx</span><span class="pill">LexisNexis</span></div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-title">Domain Knowledge</div>
+        <div class="pills"><span class="pill">Private Banking</span><span class="pill">KYC / AML</span><span class="pill">Marketing Analytics</span><span class="pill">BI</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- EDUCATION -->
+<div class="sec-wrap alt" id="education">
+  <section>
+    <div class="sec-label">
+      <span class="sec-tag">Education &amp; Certifications</span>
+      <div class="sec-rule"></div>
+      <span class="sec-num">05</span>
+    </div>
+    <h2>Academic <em>Foundations.</em></h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-deg">MSc · Business Analytics &amp; Information Systems</div>
+        <div class="edu-school">University of South Florida</div>
+        <div class="edu-yr">2019 — 2021 &nbsp;·&nbsp; Tampa, FL</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-deg">BTech · Computer Engineering</div>
+        <div class="edu-school">Charotar University of Science and Technology</div>
+        <div class="edu-yr">2013 — 2017 &nbsp;·&nbsp; Gujarat, India</div>
+      </div>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-row"><div class="cert-badge">G</div>Google Data Analytics Professional Certificate</div>
+      <div class="cert-row"><div class="cert-badge">I</div>IBM Data Science Professional Certificate</div>
+      <div class="cert-row"><div class="cert-badge">M</div>McKinsey.org Forward Program</div>
+      <div class="cert-row"><div class="cert-badge">∑</div>Statistical Inference · Johns Hopkins</div>
+      <div class="cert-row"><div class="cert-badge">μ</div>Microeconomics: The Power of Markets · Penn</div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="sec-wrap" id="contact">
+  <section>
+    <div class="sec-label" style="justify-content:center; margin-bottom:1.5rem;">
+      <span class="sec-tag">Contact</span>
+      <div class="sec-rule" style="max-width:80px;"></div>
+      <span class="sec-num">06</span>
+    </div>
+    <div class="contact-headline">Let's Connect.</div>
+    <p class="contact-sub">Open to data leadership conversations, advisory opportunities, and meaningful collaboration.</p>
+    <a href="mailto:ninadmehta01@gmail.com" class="contact-email">ninadmehta01@gmail.com</a>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/ninadmehta20" target="_blank" class="social-btn">LinkedIn ↗</a>
+      <a href="https://ninadmehta01.medium.com" target="_blank" class="social-btn">Medium Blog ↗</a>
+      <a href="https://bit.ly/3tKC7Pl" target="_blank" class="social-btn">Portfolio ↗</a>
+      <a href="tel:+18133574623" class="social-btn">+1 813 357 4623</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <span>© 2026 Ninad Mehta &nbsp;·&nbsp; Tampa, Florida</span>
+  <span>ninadmehta01@gmail.com</span>
+</footer>
+
+</body>
+</html>
