@@ -629,5 +629,78 @@
   <span>ninadmehta01@gmail.com</span>
 </footer>
 
+
+<script>
+// Scroll-reveal for timeline items
+(function () {
+  var items = document.querySelectorAll('.tl-item');
+  items.forEach(function (el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-14px)';
+  });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.style.opacity = '';
+      entry.target.style.transform = '';
+      entry.target.classList.add('vis');
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+
+// Active nav link highlight on scroll
+(function () {
+  var links = document.querySelectorAll('.nav-links a[href^="#"]');
+  var ids = Array.from(links).map(function (a) { return a.getAttribute('href').slice(1); });
+  var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+  function update() {
+    var scrollY = window.scrollY + 80;
+    var active = sections[0];
+    sections.forEach(function (sec) { if (sec.offsetTop <= scrollY) active = sec; });
+    links.forEach(function (a) {
+      a.style.color = a.getAttribute('href') === '#' + active.id ? 'var(--gold)' : '';
+    });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+// Animated number counters
+(function () {
+  function parse(text) {
+    var m = text.trim().match(/^(~?\$?)([\d.]+)(K\+?|\+?%?)?$/);
+    return m ? { pre: m[1], n: parseFloat(m[2]), suf: m[3] || '', orig: text.trim() } : null;
+  }
+  function animate(el, p) {
+    var t0;
+    function step(now) {
+      if (!t0) t0 = now;
+      var prog = Math.min((now - t0) / 1200, 1);
+      var v = p.n * (1 - Math.pow(1 - prog, 3));
+      el.textContent = p.pre + Math.round(v) + p.suf;
+      if (prog < 1) requestAnimationFrame(step);
+      else el.textContent = p.orig;
+    }
+    requestAnimationFrame(step);
+  }
+  var map = new Map();
+  document.querySelectorAll('.stat-val, .metric-val, .kpi-val').forEach(function (el) {
+    var p = parse(el.textContent);
+    if (p) map.set(el, p);
+  });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting || !map.has(entry.target)) return;
+      animate(entry.target, map.get(entry.target));
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+  map.forEach(function (_, el) { io.observe(el); });
+})();
+</script>
+
 </body>
 </html>
